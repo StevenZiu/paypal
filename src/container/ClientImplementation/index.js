@@ -78,6 +78,7 @@ const ClientContainer = (props) => {
   )
 }
 
+// load SDK for smart checkout button
 export default scriptLoader([
   "https://www.paypal.com/sdk/js?client-id=AfamcRs0Q98lGnLwF-GsUC5ghfqpZ_kO2GvXLmHVvmgxlJ__SMwvO3-eu4cQevj7MUlp5x9CTQeKwChV",
 ])(withRouter(ClientContainer))
