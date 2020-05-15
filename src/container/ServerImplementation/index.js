@@ -13,41 +13,50 @@ const ServerContainer = (props) => {
     }
 
     if (paypal !== null) {
-      paypal.Button.render(
-        {
-          env: "sandbox", // Or 'production'
-          // Set up the payment:
-          // 1. Add a payment callback
-          payment: function (data, actions) {
-            // 2. Make a request to your server
-            return actions.request
-              .post(`${API_SERVER}/api/v1/create-payment`, {
-                amount: 3,
-              })
+      paypal
+        .Buttons({
+          createOrder: function () {
+            return fetch(`${API_SERVER}/api/v1/create-paypal-transaction`, {
+              method: "post",
+              headers: {
+                "content-type": "application/json",
+              },
+            })
               .then(function (res) {
-                // 3. Return res.id from the response
-                return res.id
+                return res.json()
+              })
+              .then(function (data) {
+                return data.orderID // Use the same key name for order ID on the client and server
               })
           },
-          // Execute the payment:
-          // 1. Add an onAuthorize callback
-          onAuthorize: function (data, actions) {
-            // 2. Make a request to your server
-            return actions.request
-              .post(`${API_SERVER}/api/v1/execute-payment/`, {
-                paymentID: data.paymentID,
-                payerID: data.payerID,
-              })
-              .then(function (res) {
-                if (res.status === "success") {
-                  alert("can rest now!")
-                }
-                // 3. Show the buyer a confirmation message.
-              })
+          onApprove: (data) => {
+            console.log(data)
+            return fetch(`${API_SERVER}/api/v1/capture-paypal-transaction`, {
+              method: "post",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                orderID: data.orderID,
+              }),
+            }).then((res) => {
+              if (res.status === 200) {
+                console.log(props)
+                props.history.push("/order-complete")
+              }
+              console.log(res)
+              // return res.json()
+            })
+            // .then(function (details) {
+            //   console.log(details)
+            //   // if (details.error === "INSTRUMENT_DECLINED") {
+            //   //   return actions.restart()
+            //   // }
+            //   alert("Transaction approved by " + details.payer_given_name)
+            // })
           },
-        },
-        "#paypal-button-container"
-      )
+        })
+        .render("#paypal-button-container")
     }
   }, [paypal, props.isScriptLoadSucceed, props.isScriptLoaded])
   return (
@@ -79,6 +88,6 @@ const ServerContainer = (props) => {
   )
 }
 
-export default scriptLoader(["https://www.paypalobjects.com/api/checkout.js"])(
-  ServerContainer
-)
+export default scriptLoader([
+  "https://www.paypal.com/sdk/js?client-id=AfamcRs0Q98lGnLwF-GsUC5ghfqpZ_kO2GvXLmHVvmgxlJ__SMwvO3-eu4cQevj7MUlp5x9CTQeKwChV",
+])(withRouter(ServerContainer))

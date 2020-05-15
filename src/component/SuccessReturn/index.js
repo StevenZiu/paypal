@@ -3,14 +3,14 @@ import { withRouter } from "react-router-dom"
 import "./style.scss"
 
 const SuccessReturn = (props) => {
-  const { state } = props.location
+  const { state = {} } = props.location
   return (
     <div class="checkout">
       <h1>Checkout Completed</h1>
       <p>You are about to buy:</p>
       <p>
         <img
-          class="item"
+          className="item"
           title="Image of Cover"
           src="https://i.imgur.com/knxv5oN.jpg"
         />

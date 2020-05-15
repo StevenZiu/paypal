@@ -13,26 +13,18 @@ const HeaderWrapper = (props) => {
     props.history.push("server-implement")
   }
 
-  const selectItem = (index) => {
-    if (index === "server") {
+  useEffect(() => {
+    console.log(props)
+    if (props.location.pathname === "/server-implement") {
       document.getElementById("server").classList.add("ant-menu-item-selected")
       document
         .getElementById("client")
         .classList.remove("ant-menu-item-selected")
-    } else {
+    } else if (props.location.pathname === "/client-implement") {
       document.getElementById("client").classList.add("ant-menu-item-selected")
       document
         .getElementById("server")
         .classList.remove("ant-menu-item-selected")
-    }
-  }
-
-  useEffect(() => {
-    console.log(props)
-    if (props.location.pathname === "/server-implement") {
-      selectItem("server")
-    } else {
-      selectItem("client")
     }
   })
   return (

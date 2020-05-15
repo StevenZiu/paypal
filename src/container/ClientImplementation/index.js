@@ -12,7 +12,6 @@ const ClientContainer = (props) => {
     }
     // render paypal button once sdk load successfully
     if (paypal !== null) {
-      console.log(paypal)
       paypal
         .Buttons({
           createOrder: (data, actions) => {
