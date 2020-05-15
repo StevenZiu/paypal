@@ -1,0 +1,29 @@
+.main-content {
+  padding: 3em 3em 0;
+  width: 100vw;
+  margin: 0 auto;
+  @media (max-width: 500px) {
+    width: 100%;
+    padding: 0.5em;
+  }
+  .site-layout-content {
+    background: #fff;
+    padding: 2em;
+    min-height: 82vh;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media (max-width: 500px) {
+      width: 100%;
+      padding: 0.8em;
+    }
+  }
+}
+
+// #components-layout-demo-top .logo {
+//   width: 120px;
+//   height: 31px;
+//   background: rgba(255, 255, 255, 0.2);
+//   margin: 16px 24px 16px 0;
+//   float: left;
+// }

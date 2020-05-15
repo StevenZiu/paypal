@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}

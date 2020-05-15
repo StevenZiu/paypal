@@ -1,0 +1,42 @@
+.item {
+  width: 80px;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+.button {
+  background: #0099cc;
+  padding: 4px;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px 5px;
+}
+.button:hover {
+  background: #33b5e5;
+}
+.checkout {
+  margin: 0 auto;
+  width: 350px;
+}
+.addr input {
+  width: 100%;
+  outline: none;
+  border: 0px solid;
+  padding: 5px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+  background: #eee;
+}
+body,
+input {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+}
+h1 {
+  font-family: "Open Sans", sans-serif;
+}
