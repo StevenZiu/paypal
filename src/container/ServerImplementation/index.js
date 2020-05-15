@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import scriptLoader from "react-async-script-loader"
 import { withRouter } from "react-router"
 import "./style.scss"
-
+import { API_SERVER } from "../../config"
 const ServerContainer = (props) => {
   const { isScriptLoaded, isScriptLoadSucceed } = props
   const [paypal, setPaypal] = useState(null)
@@ -21,7 +21,9 @@ const ServerContainer = (props) => {
           payment: function (data, actions) {
             // 2. Make a request to your server
             return actions.request
-              .post("/my-api/create-payment/")
+              .post(`${API_SERVER}/api/v1/create-payment`, {
+                amount: 3,
+              })
               .then(function (res) {
                 // 3. Return res.id from the response
                 return res.id
@@ -32,11 +34,14 @@ const ServerContainer = (props) => {
           onAuthorize: function (data, actions) {
             // 2. Make a request to your server
             return actions.request
-              .post("/my-api/execute-payment/", {
+              .post(`${API_SERVER}/api/v1/execute-payment/`, {
                 paymentID: data.paymentID,
                 payerID: data.payerID,
               })
               .then(function (res) {
+                if (res.status === "success") {
+                  alert("can rest now!")
+                }
                 // 3. Show the buyer a confirmation message.
               })
           },

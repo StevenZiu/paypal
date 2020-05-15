@@ -42,7 +42,7 @@ const ClientContainer = (props) => {
   }, [paypal, props.isScriptLoadSucceed, props.isScriptLoaded])
 
   return (
-    <>
+    <div>
       <div className="checkout">
         <h1>Checkout</h1>
         <p>You are about to buy:</p>
@@ -74,7 +74,7 @@ const ClientContainer = (props) => {
         <span>Email: sb-rpfkd1793858@personal.example.com</span>
         <span>PW: V?P99V>p</span>
       </div>
-    </>
+    </div>
   )
 }
 
