@@ -51,7 +51,7 @@ const ClientContainer = (props) => {
             title="Image of Cover"
             src="https://i.imgur.com/knxv5oN.jpg"
           />
-          The PayPal Wars for $0.01
+          The PayPal Wars for $0.36
         </p>
         <p>Ship to:</p>
         <div className="addr">

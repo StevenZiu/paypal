@@ -1,1 +1,1 @@
-export const API_SERVER = "http://localhost:3001"
+export const API_SERVER = "https://planar-cistern-277404.uc.r.appspot.com"
