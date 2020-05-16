@@ -20,7 +20,6 @@ class BasicLayout extends React.Component {
           <div className="site-layout-content">
             <Switch>
               <Redirect exact from="/" to="/client-implement" />
-
               <Route exact path="/client-implement">
                 <ClientContainer />
               </Route>

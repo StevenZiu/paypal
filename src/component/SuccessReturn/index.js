@@ -4,6 +4,10 @@ import "./style.scss"
 
 const SuccessReturn = (props) => {
   const { state = {} } = props.location
+  if (state.payer === undefined) {
+    props.history.push("/")
+    return ""
+  }
   return (
     <div className="checkout">
       <h1>Checkout Completed</h1>
