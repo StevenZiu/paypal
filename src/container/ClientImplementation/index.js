@@ -20,7 +20,7 @@ const ClientContainer = (props) => {
               purchase_units: [
                 {
                   amount: {
-                    value: "0.369",
+                    value: "0.36",
                   },
                 },
               ],
