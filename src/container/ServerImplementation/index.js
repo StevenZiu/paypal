@@ -29,8 +29,7 @@ const ServerContainer = (props) => {
                 return data.orderID // Use the same key name for order ID on the client and server
               })
           },
-          onApprove: (data) => {
-            console.log(data)
+          onApprove: (data, actions) => {
             return fetch(`${API_SERVER}/api/v1/capture-paypal-transaction`, {
               method: "post",
               headers: {
@@ -39,51 +38,62 @@ const ServerContainer = (props) => {
               body: JSON.stringify({
                 orderID: data.orderID,
               }),
-            }).then((res) => {
-              if (res.status === 200) {
-                console.log(props)
-                props.history.push("/order-complete")
-              }
-              console.log(res)
-              // return res.json()
             })
-            // .then(function (details) {
-            //   console.log(details)
-            //   // if (details.error === "INSTRUMENT_DECLINED") {
-            //   //   return actions.restart()
-            //   // }
-            //   alert("Transaction approved by " + details.payer_given_name)
-            // })
+              .then((res) => {
+                return res.json()
+              })
+              .then((details) => {
+                console.log(details)
+                if (details.error === "INSTRUMENT_DECLINED") {
+                  return actions.restart()
+                }
+                if (details.status === "COMPLETED") {
+                  props.history.push("/order-complete", details)
+                  console.log(details)
+                }
+              })
           },
         })
         .render("#paypal-button-container")
     }
   }, [paypal, props.isScriptLoadSucceed, props.isScriptLoaded])
   return (
-    <div className="checkout">
-      <h1>Checkout (through server)</h1>
-      <p>You are about to buy:</p>
-      <p>
-        <img
-          className="item"
-          title="Image of Cover"
-          src="https://i.imgur.com/knxv5oN.jpg"
-        />
-        The PayPal Wars for $0.01
-      </p>
-      <p>Ship to:</p>
-      <div className="addr">
+    <div>
+      <div className="checkout">
+        <h1>Checkout (through server)</h1>
+        <p>You are about to buy:</p>
         <p>
-          5 Temasek Boulevard
-          <br />
-          #09-01 Suntec Tower Five
-          <br />
-          038985
-          <br />
-          Singapore
+          <img
+            className="item"
+            title="Image of Cover"
+            src="https://i.imgur.com/knxv5oN.jpg"
+          />
+          The PayPal Wars for $0.01
         </p>
+        <p>Ship to:</p>
+        <div className="addr">
+          <p>
+            5 Temasek Boulevard
+            <br />
+            #09-01 Suntec Tower Five
+            <br />
+            038985
+            <br />
+            Singapore
+          </p>
+        </div>
+        <div id="paypal-button-container"></div>
       </div>
-      <div id="paypal-button-container"></div>
+      <div className="explain">
+        Sdk is loaded in the server side, once transaction is approved by payer,
+        the server side will fire another api call to get the transaction
+        detail, then return the ddetail information to client, which will be
+        rendered in the success redirect page. For fail funding, the client will
+        automatically restart the flow by calling actions.restart(). <br />
+        Sandbox account to test:
+        <span>Email: sb-rpfkd1793858@personal.example.com</span>
+        <span>PW: V?P99V>p</span>
+      </div>
     </div>
   )
 }

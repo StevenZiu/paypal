@@ -20,7 +20,7 @@ const ClientContainer = (props) => {
               purchase_units: [
                 {
                   amount: {
-                    value: "0.1",
+                    value: "0.369",
                   },
                 },
               ],
@@ -43,7 +43,7 @@ const ClientContainer = (props) => {
   return (
     <div>
       <div className="checkout">
-        <h1>Checkout</h1>
+        <h1>Checkout (Smart Button)</h1>
         <p>You are about to buy:</p>
         <p>
           <img
@@ -69,7 +69,8 @@ const ClientContainer = (props) => {
       </div>
       <div className="explain">
         As the client implmentation of PayPal sdk will automatically handle the
-        funding failures, so no customize step here. Sandbox account to test:
+        funding failures, so no customize step here. <br />
+        Sandbox account to test:
         <span>Email: sb-rpfkd1793858@personal.example.com</span>
         <span>PW: V?P99V>p</span>
       </div>
