@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## PayPal Checkout Demo
 
-## Available Scripts
+This PayPal checkout demo project was bootstrapped with React. With the help of latest react hook api.
+
+### Live demo (Hosted in Firebase)
+
+https://client-5c15a.web.app/client-implement
+
+### Build
 
 In the project directory, you can run:
+
+### `npm i`
+
+then:
 
 ### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Structure
 
-### `npm test`
+#### Client Implementation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This demo project includes two way to finish PayPal checkout flow, in the client Implementation, the Smart Payment Button takes care of the whole checkout flow. Two hook functions are implemented, one is create order which will call order api to create a new transaction, once payer approved the transaction, the capture function will capture the fund, then notify payer the transaction is done. The page will redirect to complete page with transaction detail information. The smart button will handle funding failure automatically (ask user to select other approaches).
 
-### `npm run build`
+#### Server Implementation
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In the Server Side Implementation, the frontend for user is basically same, but when payer click paypal button will is actually calling out own backend to create transaction, then the backend will use paypal checkout server SDK to create order, then return the orderId to client, once payer approved the order, the fronent will tell backend to call order capture, then there is another call in the backend to get transaction detail, which will be send back to client for user reference. Same like client side implementation, the page will automatically redirect to complete page then show detail information. If there is funding failure, the client will call actions.restart to restart the flow.

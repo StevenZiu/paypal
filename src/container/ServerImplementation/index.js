@@ -90,6 +90,9 @@ const ServerContainer = (props) => {
         detail, then return the ddetail information to client, which will be
         rendered in the success redirect page. For fail funding, the client will
         automatically restart the flow by calling actions.restart(). <br />
+        Once transaction capture success, the page will automatically redirect
+        to complete page.
+        <br />
         Sandbox account to test:
         <span>Email: sb-rpfkd1793858@personal.example.com</span>
         <span>PW: V?P99V>p</span>

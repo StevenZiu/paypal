@@ -70,7 +70,9 @@ const ClientContainer = (props) => {
       <div className="explain">
         As the client implmentation of PayPal sdk will automatically handle the
         funding failures, so no customize step here. <br />
-        Sandbox account to test:
+        Once transaction capture success, the page will automatically redirect
+        to complete page.
+        <br /> Sandbox account to test:
         <span>Email: sb-rpfkd1793858@personal.example.com</span>
         <span>PW: V?P99V>p</span>
       </div>
