@@ -6,6 +6,11 @@ This PayPal checkout demo project was bootstrapped with React. With the help of 
 
 https://client-5c15a.web.app/client-implement
 
+### Payer Sandbox Acount for tesing
+
+sb-rpfkd1793858@personal.example.com
+pw: V?P99V>p
+
 ### Build
 
 In the project directory, you can run:
