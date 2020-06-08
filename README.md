@@ -1,4 +1,4 @@
-## PayPal Checkout Demo
+## PayPal Checkout Demo ![img](https://github.com/stevenziu/paypal/workflows/Node.js%20CI/badge.svg)
 
 This PayPal checkout demo project was bootstrapped with React. With the help of latest react hook api.
 
