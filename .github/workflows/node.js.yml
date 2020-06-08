@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: CI/CD in Firebse
 env: 
   CI: false
 on:
@@ -28,3 +28,9 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: Deploy to Firebase
+      uses: lowply/deploy-firebase@v0.0.2
+      env:
+        FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+        FIREBASE_PROJECT: paypal-client
+
